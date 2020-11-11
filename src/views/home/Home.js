@@ -55,16 +55,24 @@ const Home = () => {
             to={Math.abs(center - (3 - idx)) === 3 ? '/dance' : null}
             status={Math.abs(center - (3 - idx)) % game_number}
           >
-            {game.titile}
+            <s.SImg src={game.src} alt="game-image" />
+            <s.DescContainer>
+              <s.Title current={Math.abs(center - (3 - idx)) === 3}>
+                {game.titile}
+              </s.Title>
+              <s.Singer current={Math.abs(center - (3 - idx)) === 3}>
+                {game.singer}
+              </s.Singer>
+            </s.DescContainer>
           </s.SLink>
         ))}
       </s.MenuWrapper>
-      <button
-        style={{ position: 'absolute', bottom: 0, right: 0, color: 'wheat' }}
-        onClick={() => moveTrack('next')}
-      >
-        다음
-      </button>
+      <s.NextButton onClick={() => moveTrack('next')}>
+        <i
+          className="icon-right-open"
+          style={{ fontSize: 28, marginLeft: 5 }}
+        />
+      </s.NextButton>
     </>
   );
 };
