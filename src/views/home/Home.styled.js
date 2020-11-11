@@ -102,7 +102,7 @@ export const Title = styled.h1`
   width: 88%;
   font-size: ${(props) => (props.current ? 24 : 18)}px;
   font-weight: 600;
-  margin-bottom: 8%;
+  margin-bottom: 4%;
   color: white;
 `;
 

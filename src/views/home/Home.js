@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import Video from 'components/utils/backgroundvideo';
 
 import * as s from './Home.styled';
+import { Music } from '../../components/utils/music';
 
 const game_number = 7;
 
@@ -51,7 +52,7 @@ const Home = () => {
       <s.MenuWrapper>
         {game_list.map((game, idx) => (
           <s.SLink
-            key={game.title + idx}
+            key={game.title}
             to={Math.abs(center - (3 - idx)) === 3 ? '/dance' : null}
             status={Math.abs(center - (3 - idx)) % game_number}
           >
@@ -81,38 +82,38 @@ export default Home;
 
 const game_list = [
   {
-    titile: 'game',
-    singer: 0,
-    src: '',
+    titile: 'Bang Bang Bang',
+    singer: 'Big-Bang',
+    src: Music.bangbangbang,
   },
   {
-    titile: 'game',
-    singer: 0,
-    src: '',
+    titile: 'Call Me Maybe',
+    singer: 'Carly Rae Jepsen',
+    src: Music.callmemaybe,
   },
   {
-    titile: 'game',
-    singer: 0,
-    src: '',
+    titile: 'HandClap',
+    singer: 'Fitz and The Tantrums',
+    src: Music.handclap,
   },
   {
-    titile: 'game',
-    singer: 0,
-    src: '',
+    titile: '24K Magic',
+    singer: 'Bruno Mars',
+    src: Music.magic24k,
   },
   {
-    titile: 'game',
-    singer: 0,
-    src: '',
+    titile: 'Slow Heartbeat',
+    singer: 'Layone',
+    src: Music.slowpump,
   },
   {
-    titile: 'game',
-    singer: 0,
-    src: '',
+    titile: 'Watermelon Sugar',
+    singer: 'Harry Styles',
+    src: Music.watermelon,
   },
   {
-    titile: 'game',
-    singer: 0,
-    src: '',
+    titile: 'Bad Guy',
+    singer: 'Billie Eilish',
+    src: Music.badguy,
   },
 ];
