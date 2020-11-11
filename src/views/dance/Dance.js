@@ -10,7 +10,7 @@ const Dance = () => {
 
   return (
     <>
-      <TmPose grade={grade} setGrade={setGrade} />
+      {/* <TmPose grade={grade} setGrade={setGrade} /> */}
       <div>
         <canvas id="canvas"></canvas>
       </div>
