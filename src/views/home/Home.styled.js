@@ -140,3 +140,19 @@ export const NextButton = styled.button`
     transition: all 0.3s;
   }
 `;
+
+export const PlayButton = styled.button`
+  position: absolute;
+  right: 0.8rem;
+  width: 60px;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 4px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 987654321;
+
+  font-size: 12px;
+`;
