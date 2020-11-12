@@ -1,3 +1,7 @@
-import Video from 'assets/video/universe-1.mp4';
+import HomeVideo from 'assets/video/universe-1.mp4';
+import DanceVideo from '../../../dance-video.mov';
 
-export default Video;
+export const Video = {
+  HomeVideo: HomeVideo,
+  DanceVideo: DanceVideo,
+};

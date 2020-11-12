@@ -5,6 +5,7 @@ import callmemaybe from 'assets/img/carly-callmemaybe.jpg';
 import magic24k from 'assets/img/bruno-24kmagic.jpg';
 import bangbangbang from 'assets/img/bigbang-bangbangbang.jpg';
 import badguy from 'assets/img/billie-badguy.jpg';
+import moveslikejagger from 'assets/img/maroon5-mlj.jpg';
 
 export const Music = {
   slowpump: slowpump,
@@ -14,4 +15,5 @@ export const Music = {
   magic24k: magic24k,
   bangbangbang: bangbangbang,
   badguy: badguy,
+  moveslikejagger: moveslikejagger,
 };

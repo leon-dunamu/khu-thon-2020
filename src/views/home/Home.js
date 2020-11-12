@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import * as s from './Home.styled';
 
 import { Music } from 'components/utils/music';
-import Video from 'components/utils/backgroundvideo';
+import { Video } from 'components/utils/backgroundvideo';
 
 const game_number = 7;
 
@@ -36,7 +36,7 @@ const Home = () => {
           minHeight: '100%',
         }}
       >
-        <source src={Video} type="video/mp4" />
+        <source src={Video.HomeVideo} type="video/mp4" />
       </video>
       <s.MenuWrapper>
         {game_list.map((game, idx) => {
@@ -79,14 +79,14 @@ export default Home;
 
 const game_list = [
   {
+    titile: 'Moves Like Jagger',
+    singer: 'Maroon 5',
+    src: Music.moveslikejagger,
+  },
+  {
     titile: 'Bang Bang Bang',
     singer: 'Big-Bang',
     src: Music.bangbangbang,
-  },
-  {
-    titile: 'Call Me Maybe',
-    singer: 'Carly Rae Jepsen',
-    src: Music.callmemaybe,
   },
   {
     titile: 'HandClap',

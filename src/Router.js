@@ -21,8 +21,9 @@ const AppRouter = () => (
 export default AppRouter;
 
 const Outer = {
-  width: DeskTopWidth,
+  minWidth: DeskTopWidth,
   minHeight: SmallTabletWidth,
+  width: '100vw',
   height: '100vh',
   margin: '0 auto',
   backgroundColor: 'rgba(0,0,0,0.05)',
