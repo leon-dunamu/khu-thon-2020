@@ -19,7 +19,7 @@ const TmPose = ({ grade, setGrade }) => {
     maxPredictions = model.getTotalClasses();
 
     /* 웹캠 사이즈 조절 */
-    const size = 200;
+    const size = 220;
     const flip = true;
     webcam = new window.tmPose.Webcam(size, size, flip);
     await webcam.setup();
