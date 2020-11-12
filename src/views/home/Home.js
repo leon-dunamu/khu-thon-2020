@@ -6,19 +6,43 @@ import React, { useEffect, useState } from 'react';
 
 import * as s from './Home.styled';
 
+import { intromusic } from '../../components/utils/intromusic';
 import { Music } from 'components/utils/music';
 import { Video } from 'components/utils/backgroundvideo';
+
+const audio_list = [
+  intromusic.badguy,
+  intromusic.watermelon,
+  intromusic.pump,
+  intromusic.magic,
+  intromusic.handclap,
+  intromusic.bang,
+  intromusic.moves,
+];
 
 const game_number = 7;
 
 const Home = () => {
   const [center, setCenter] = useState(3);
+  const [audio, setAudio] = useState(
+    new Audio(audio_list[center % game_number]),
+  );
 
   const moveTrack = () => setCenter((prev) => prev + 1);
 
   useEffect(() => {
     document.querySelector('video').playbackRate = 0.7;
   }, []);
+
+  useEffect(() => {
+    const currentAudio = new Audio(audio_list[center % game_number]);
+
+    setAudio((prev) => {
+      prev?.pause();
+      currentAudio.play();
+      return currentAudio;
+    });
+  }, [center]);
 
   return (
     <>
