@@ -30,11 +30,23 @@ const Dance = () => {
   }, []);
 
   return (
-    <>
+    <div
+      style={{
+        overflow: 'hidden',
+        width: '100%',
+        height: '100%',
+      }}
+    >
       <div
         style={{
-          width: '100%',
-          height: 100,
+          width: 'calc(100vw - 20px)',
+          height: 120,
+          border: '10px double #966E8F',
+          borderRadius: 5,
+          background: 'black',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <JudgementHeader grade={grade} />
@@ -47,11 +59,11 @@ const Dance = () => {
           preload="auto"
           volume="0"
           style={{
-            position: 'absoulte',
-            top: 0,
-            left: 0,
+            position: 'relative',
+            // bottom: 0,
+            // left: 0,
             width: '100vw',
-            height: '100vh',
+            // height: '100vh',
           }}
         >
           <source src={Video.DanceVideo} type="video/mp4" />
@@ -63,7 +75,7 @@ const Dance = () => {
         <s.VideoPlayButton onClick={play}>play</s.VideoPlayButton>
         <s.CorrectPoseContainer></s.CorrectPoseContainer>
       </s.Wrapper>
-    </>
+    </div>
   );
 };
 
