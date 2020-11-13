@@ -14,6 +14,7 @@ const Dance = () => {
   const [grade, setGrade] = useState({
     grade: undefined,
     idx: 0,
+    sum: 0,
   });
 
   const [isPlay, setPlay] = useState(false);
@@ -23,16 +24,6 @@ const Dance = () => {
     setPlay(true);
     video.play();
   };
-
-  // useEffect(() => {
-  //   const i = setInterval(() => {
-  //     setGrade((p) => {
-  //       if (p < 2) return p + 1;
-  //       else return 0;
-  //     });
-  //   }, 5000);
-  //   return () => clearInterval(i);
-  // }, []);
 
   return (
     <div
