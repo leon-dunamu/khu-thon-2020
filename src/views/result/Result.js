@@ -4,15 +4,15 @@
 
 import React, { useState } from 'react';
 
-import { Video } from 'components/utils/backgroundvideo';
-
-import * as s from './Result.styled';
+import { FirebaseRDB } from 'config/firebase.config';
 import IsSpecial from 'components/syntax/IsSpecial';
-import { Link } from 'react-router-dom';
+
+import ResultPresenter from './ResultPresenter';
 
 const Result = ({ grade }) => {
   const [_grade, setGrade] = useState(grade || [100, 100, 100]);
   const [nickname, setNickname] = useState('');
+  const [enable, setEnable] = useState(true);
 
   const animateValue = (id, start, end, duration) => {
     if (start === end) return;
@@ -31,11 +31,10 @@ const Result = ({ grade }) => {
   };
 
   const onChange = (e) => {
-    const { target: value } = e;
+    if (!enable) return;
+    if (IsSpecial(e.target.value)) return;
 
-    if (IsSpecial(value)) return;
-
-    setNickname(value);
+    setNickname(e.target.value);
   };
 
   React.useEffect(() => {
@@ -56,64 +55,35 @@ const Result = ({ grade }) => {
     document.querySelector('video').playbackRate = 0.7;
   }, []);
 
-  const SaveGrade = () => {};
+  const SaveGrade = () => {
+    if (!enable) {
+      alert('이미 등록되었습니다');
+      return;
+    }
+    if (nickname === '') {
+      alert('닉네임을 입력해주세요');
+    } else if (nickname.length < 3) {
+      alert('닉네임은 최소 3자 입니다');
+    }
+    const createdAt = Date.now();
+
+    FirebaseRDB.ref(`result/${createdAt}`).set({
+      createdAt: createdAt,
+      nickname: nickname,
+      grade: 300, // need to update
+    });
+    alert('등록되었습니다');
+
+    // setNickname('');
+    setEnable(false);
+  };
 
   return (
-    <s.Container>
-      <video
-        preload="auto"
-        autoPlay={true}
-        loop="loop"
-        muted="muted"
-        volume="0"
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          minWidth: '100%',
-          minHeight: '100%',
-          zIndex: -3,
-        }}
-      >
-        <source src={Video.HomeVideo} type="video/mp4" />
-      </video>
-      <s.ResultContainer>
-        <s.Title>RESULT</s.Title>
-        <s.Row style={{ marginTop: 42 }}>
-          <s.ResultTitle type="perfect">PERFECT</s.ResultTitle>
-          <s.ResultGrade id="perfect"></s.ResultGrade>
-        </s.Row>
-        <s.Row>
-          <s.ResultTitle type="good">GOOD</s.ResultTitle>
-          <s.ResultGrade id="good"></s.ResultGrade>
-        </s.Row>
-        <s.Row>
-          <s.ResultTitle type="bad">BAD</s.ResultTitle>
-          <s.ResultGrade id="bad"></s.ResultGrade>
-        </s.Row>
-        <s.Row total>
-          <s.ResultTitle type="total" total>
-            TOTAL
-          </s.ResultTitle>
-          <s.ResultGrade id="total"></s.ResultGrade>
-        </s.Row>
-        <s.EnrollContainer>
-          <s.EnrollTitle>SAVE YOUR GRADE</s.EnrollTitle>
-          <s.InputWrapper>
-            <s.SInput
-              type="nickname"
-              name="nickname"
-              placeholder="NICKNAME"
-              onChange={onChange}
-            />
-            <s.SaveButton onClick={SaveGrade}>SAVE</s.SaveButton>
-          </s.InputWrapper>
-          <s.HomeButton>
-            <s.SLink to="/dance">GO HOME</s.SLink>
-          </s.HomeButton>
-        </s.EnrollContainer>
-      </s.ResultContainer>
-    </s.Container>
+    <ResultPresenter
+      nickname={nickname}
+      onChange={onChange}
+      SaveGrade={SaveGrade}
+    />
   );
 };
 

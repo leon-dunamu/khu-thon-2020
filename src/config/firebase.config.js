@@ -1,12 +1,7 @@
-import * as firebase from 'firebase/app';
-
-/* firebase 인증 */
-import 'firebase/auth';
+import firebase from 'firebase/app';
 
 /* firebase database */
 import 'firebase/database';
-/* firebase storage */
-import 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -27,11 +22,5 @@ firebase.initializeApp(firebaseConfig);
  **/
 export const FirebaseInstance = firebase;
 
-/* firebase 인증 */
-export const FirebaseAuth = firebase.auth();
-
 /* firebase database */
 export const FirebaseRDB = firebase.database();
-
-/* firebase storage */
-export const FirebaseStorage = firebase.storage();
