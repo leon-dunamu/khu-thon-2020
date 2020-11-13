@@ -1,25 +1,26 @@
 import React, { useEffect } from 'react';
 import Sketch from 'react-p5';
 import { colorData } from '../../../theme/color';
+import { DeskTopWidth } from 'theme/width';
 
 let P5;
 let system;
 
 const effectData = [
   {
-    color: colorData.bad,
-    vectorSize: 1,
-    number: 10,
+    color: [169, 169, 169],
+    vectorSize: 2,
+    number: 20,
     text: 'Bad',
   },
   {
-    color: colorData.good,
+    color: [0, 255, 0],
     vectorSize: 3,
     number: 30,
     text: 'Good',
   },
   {
-    color: colorData.perfect,
+    color: [255, 204, 0],
     vectorSize: 5,
     number: 50,
     text: 'Perfect!',
@@ -30,6 +31,8 @@ const effectData = [
 let { color, vectorSize, number, text } = effectData[0];
 
 let text_size = 48;
+let fade = 255;
+let fadeAmount = 1;
 
 // A simple Particle class
 let Particle = function (position) {
@@ -60,7 +63,7 @@ Particle.prototype.display = function () {
   P5.strokeWeight(2);
 
   P5.fill(P5.color(color), this.lifespan);
-  P5.ellipse(this.position.x, this.position.y, 12, 12);
+  P5.ellipse(this.position.x, this.position.y, 8, 8);
 };
 
 // Is the particle still useful?
@@ -90,7 +93,7 @@ ParticleSystem.prototype.run = function () {
 const setup = (p5, canvasParentRef) => {
   // use parent to render the canvas in this ref
   // (without that p5 will render the canvas outside of your component)
-  p5.createCanvas(1480, 200).parent(canvasParentRef);
+  p5.createCanvas(1000, 100).parent(canvasParentRef);
   P5 = p5;
   P5.textAlign(P5.CENTER, P5.CENTER);
   system = new ParticleSystem(P5.createVector(P5.width / 2, 60));
@@ -98,11 +101,15 @@ const setup = (p5, canvasParentRef) => {
 
 const draw = (p5) => {
   p5.background(0);
-  p5.fill(255, 0, 0, 0);
+  p5.fill(color[0], color[1], color[2], fade);
+
   p5.text(text, p5.width / 2, 60);
 
   if (text_size < 56) {
     text_size += 4;
+  } else {
+    fadeAmount = -2;
+    fade += fadeAmount;
   }
 
   p5.textSize(text_size);
@@ -129,8 +136,9 @@ const JudgementHeader = (props) => {
 
     setTimeout(() => {
       addParticles();
-      text_size = 32;
-    }, 100);
+      fade = 255;
+      text_size = 24;
+    }, 200);
   }, [props.grade]);
 
   return <Sketch setup={setup} draw={draw} />;
