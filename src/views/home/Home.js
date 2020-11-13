@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 
 import * as s from './Home.styled';
 
-import { intromusic } from '../../components/utils/intromusic';
+import { intromusic } from 'components/utils/intromusic';
 import { Music } from 'components/utils/music';
 import { Video } from 'components/utils/backgroundvideo';
 
@@ -17,6 +17,8 @@ const Home = () => {
   const [audio, setAudio] = useState(
     new Audio(audio_list[center % game_number]),
   );
+
+  const [init, setInit] = useState(true);
 
   const moveTrack = () => setCenter((prev) => prev + 1);
 
@@ -69,7 +71,7 @@ const Home = () => {
               to={currentIdx === 3 ? '/dance' : null}
               status={currentIdx}
               onClick={() => {
-                audio.pause();
+                if (currentIdx === 3) audio.pause();
               }}
             >
               <s.SImg src={game.src} alt="game-image" />
