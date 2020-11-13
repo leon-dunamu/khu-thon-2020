@@ -10,13 +10,16 @@ import i7 from 'assets/img/guide/7.png';
 import i8 from 'assets/img/guide/8.png';
 import i9 from 'assets/img/guide/9.png';
 
-const delayArray = [10, 8, 3, 2, 5, 4, 3, 3, 4, 4, 4, 6, 4];
+const delayArray = [10, 8, 4, 3, 6, 5, 4, 4, 4, 3, 6, 6, 5];
 const imgArray = [i1, i2, i3, i4, i5, i6, i7, i8, i9];
+const fileArray = [0, 1, 2, 3, 4, 5, 1, 2, 3, 4, 6, 7, 8];
 
 const Guide = (props) => {
   return (
     <>
-      <s.GImage src={imgArray[props.grade.idx]}></s.GImage>
+      <s.GImage
+        src={imgArray[fileArray[props.grade.idx ? props.grade.idx : 0]]}
+      ></s.GImage>
       <s.YellowCircle
         isPlay={props.isPlay}
         delay={delayArray[props.grade.idx]}
