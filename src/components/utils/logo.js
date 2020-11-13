@@ -1,4 +1,4 @@
-import logoimg from 'assets/img/justdance-logo.png';
+import logoimg from 'assets/img/khust_dance.png';
 
 const Logo = logoimg;
 

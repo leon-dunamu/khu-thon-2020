@@ -39,5 +39,10 @@ export const CorrectPoseContainer = styled.div`
   position: absolute;
   right: 0;
   bottom: 0;
+  border: 10px double #966e8f;
   border-radius: 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

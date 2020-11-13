@@ -29,7 +29,7 @@ export const Logo = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   width: 100%;
-  height: 300px;
+  height: 400px;
 `;
 
 const clickany = keyframes`
