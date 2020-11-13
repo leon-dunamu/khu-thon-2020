@@ -9,7 +9,7 @@ import IsSpecial from 'components/syntax/IsSpecial';
 
 import ResultPresenter from './ResultPresenter';
 
-const Result = ({ grade }) => {
+const ResultContainer = ({ grade }) => {
   const [_grade, setGrade] = useState(grade || [100, 100, 100]);
   const [nickname, setNickname] = useState('');
   const [enable, setEnable] = useState(true);
@@ -87,4 +87,4 @@ const Result = ({ grade }) => {
   );
 };
 
-export default Result;
+export default ResultContainer;

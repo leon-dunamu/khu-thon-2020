@@ -60,7 +60,7 @@ const ResultPresenter = ({ nickname, onChange, SaveGrade }) => (
           <s.SaveButton onClick={SaveGrade}>SAVE</s.SaveButton>
         </s.InputWrapper>
         <s.HomeButton>
-          <s.SLink to="/dance">GO HOME</s.SLink>
+          <s.SLink to="/">GO HOME</s.SLink>
         </s.HomeButton>
       </s.EnrollContainer>
     </s.ResultContainer>
