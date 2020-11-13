@@ -9,8 +9,13 @@ import IsSpecial from 'components/syntax/IsSpecial';
 
 import ResultPresenter from './ResultPresenter';
 
-const ResultContainer = ({ grade }) => {
-  const [_grade, setGrade] = useState(grade || [100, 100, 100]);
+const ResultContainer = ({ grade, location }) => {
+  console.log(location);
+  const [_grade, setGrade] = useState([
+    18 * location.state.grade[0],
+    53 * location.state.grade[1],
+    86 * location.state.grade[2],
+  ]);
   const [nickname, setNickname] = useState('');
   const [enable, setEnable] = useState(true);
 
@@ -38,17 +43,20 @@ const ResultContainer = ({ grade }) => {
   };
 
   React.useEffect(() => {
-    const id_list = ['perfect', 'good', 'bad'];
-    for (let i = 0; i < 3; i++) {
-      setTimeout(() => {
-        animateValue(id_list[i], 0, _grade[2 - i], 800);
-      }, i * 600);
-    }
     setTimeout(() => {
-      const total = _grade[0] + _grade[1] + _grade[2];
+      const id_list = ['perfect', 'good', 'bad'];
+      for (let i = 0; i < 3; i++) {
+        setTimeout(() => {
+          animateValue(id_list[i], 0, _grade[2 - i], 500);
+          console.log(_grade[2 - i]);
+        }, i * 600);
+      }
+      setTimeout(() => {
+        const total = _grade[0] + _grade[1] + _grade[2];
 
-      animateValue('total', 0, total, 800);
-    }, 2000);
+        animateValue('total', 0, total, 50);
+      }, 2000);
+    }, 300);
   }, []);
 
   React.useEffect(() => {
