@@ -11,23 +11,28 @@ import TmPose from './TmPose';
 import { Video } from 'components/utils/backgroundvideo';
 
 const Dance = () => {
-  const [grade, setGrade] = useState(0);
+  const [grade, setGrade] = useState({
+    grade: undefined,
+    idx: 0,
+  });
+
+  const [isPlay, setPlay] = useState(false);
 
   const play = () => {
     const video = document.getElementById('dance-video');
-    console.log(video);
+    setPlay(true);
     video.play();
   };
 
-  useEffect(() => {
-    const i = setInterval(() => {
-      setGrade((p) => {
-        if (p < 2) return p + 1;
-        else return 0;
-      });
-    }, 5000);
-    return () => clearInterval(i);
-  }, []);
+  // useEffect(() => {
+  //   const i = setInterval(() => {
+  //     setGrade((p) => {
+  //       if (p < 2) return p + 1;
+  //       else return 0;
+  //     });
+  //   }, 5000);
+  //   return () => clearInterval(i);
+  // }, []);
 
   return (
     <div
@@ -52,7 +57,7 @@ const Dance = () => {
         <JudgementHeader grade={grade} />
       </div>
       <s.Wrapper>
-        {/* <TmPose grade={grade} setGrade={setGrade} /> */}
+        <TmPose grade={grade} setGrade={setGrade} isPlay={isPlay} />
 
         <video
           id="dance-video"
@@ -68,12 +73,12 @@ const Dance = () => {
         >
           <source src={Video.DanceVideo} type="video/mp4" />
         </video>
-        {/* <s.CamContainer>
+        <s.CamContainer>
           <canvas id="canvas"></canvas>
-        </s.CamContainer> */}
-        <div id="label-container" style={{ opacity: 0 }}></div>
+        </s.CamContainer>
+        <div id="label-container" style={{ opacity: 1 }}></div>
         <s.VideoPlayButton onClick={play}>play</s.VideoPlayButton>
-        <s.CorrectPoseContainer></s.CorrectPoseContainer>
+        {/* <s.CorrectPoseContainer></s.CorrectPoseContainer> */}
       </s.Wrapper>
     </div>
   );

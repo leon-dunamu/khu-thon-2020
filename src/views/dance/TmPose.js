@@ -3,13 +3,51 @@
  */
 
 import { useEffect, useState } from 'react';
+import { tmposeurl } from 'components/utils/tmposeurl';
 
 /* tmpose가 업로드 되어있는 url */
-const URL = 'https://teachablemachine.withgoogle.com/models/Z9FfIlbCc/';
+const URL = tmposeurl;
 let model, webcam, ctx, labelContainer, maxPredictions;
 
-const TmPose = ({ grade, setGrade }) => {
+const dance_sequence_class_name_list = [
+  {
+    class: 'Class 1',
+    time: 10060,
+  },
+  {
+    class: 'Class 1',
+    time: 10760,
+  },
+  {
+    class: 'Class 1',
+    time: 16380,
+  },
+  {
+    class: 'Class 2',
+    time: 18200,
+  },
+  {
+    class: 'Class 3',
+    time: 18770,
+  },
+  {
+    class: 'Class 4',
+    time: 19180,
+  },
+  {
+    class: 'Class 5',
+    time: 19670,
+  },
+];
+
+let idx = 0;
+let _isPlay = false;
+let startTime;
+
+const TmPose = ({ grade, setGrade, isPlay }) => {
   const [isLoading, setLoading] = useState(true);
+
+  const [delay, setDelay] = useState(false);
 
   const init = async () => {
     const modelURL = URL + 'model.json';
@@ -37,11 +75,13 @@ const TmPose = ({ grade, setGrade }) => {
     }
   };
 
-  const loop = async (timestamp) => {
+  const loop = async () => {
     webcam.update();
-    await predict();
+    await predict(grade.idx);
     window.requestAnimationFrame(loop);
   };
+
+  _isPlay = isPlay;
 
   const predict = async () => {
     const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
@@ -52,10 +92,54 @@ const TmPose = ({ grade, setGrade }) => {
      * @param prediction[i].probability 해당 동작에 대한 점수 / 만점은 1점
      * @description 여기에서 점수 채점
      */
-    for (let i = 0; i < maxPredictions; i++) {
-      const classPrediction =
-        prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
-      labelContainer.childNodes[i].innerHTML = classPrediction;
+    // for (let i = 0; i < maxPredictions; i++) {
+    //   const classPrediction =
+    //     prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
+    //   labelContainer.childNodes[i].innerHTML = classPrediction;
+    // }
+    if (_isPlay) {
+      if (!startTime) {
+        startTime = Date.now();
+        return;
+      }
+      const nowTime = Date.now();
+      const gapTime = nowTime - startTime;
+      if (gapTime > dance_sequence_class_name_list[idx].time) {
+        console.log(idx);
+        setGrade({
+          idx: idx++,
+          grade: 0,
+        });
+      } else {
+        if (
+          prediction
+            .find(
+              (x) => x.className === dance_sequence_class_name_list[idx].class,
+            )
+            .probability.toFixed(2) > 0.8
+        ) {
+          if (
+            Math.abs(gapTime - dance_sequence_class_name_list[idx].time) < 200
+          ) {
+            setGrade({
+              idx: idx++,
+              grade: 2,
+            });
+          } else if (
+            Math.abs(gapTime - dance_sequence_class_name_list[idx].time) < 500
+          ) {
+            setGrade({
+              idx: idx++,
+              grade: 1,
+            });
+          } else {
+            setGrade({
+              idx: idx++,
+              grade: 0,
+            });
+          }
+        }
+      }
     }
 
     drawPose(pose);
