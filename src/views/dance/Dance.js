@@ -71,7 +71,7 @@ const Dance = () => {
         <div id="label-container" style={{ opacity: 1 }}></div>
         <s.VideoPlayButton onClick={play}>play</s.VideoPlayButton>
         <s.CorrectPoseContainer>
-          <Guide />
+          <Guide grade={grade} isPlay={isPlay} />
         </s.CorrectPoseContainer>
       </s.Wrapper>
     </div>
