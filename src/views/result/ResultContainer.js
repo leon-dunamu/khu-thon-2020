@@ -2,7 +2,7 @@
  * @description 게임 끝난 후 결과 창
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { FirebaseRDB } from 'config/firebase.config';
 import IsSpecial from 'components/syntax/IsSpecial';
@@ -80,7 +80,7 @@ const ResultContainer = ({ grade, location }) => {
     FirebaseRDB.ref(`result/${createdAt}`).set({
       createdAt: createdAt,
       nickname: nickname,
-      grade: 300, // need to update
+      grade: _grade[0] + _grade[1] + _grade[2], // need to update
     });
     alert('등록되었습니다');
 
@@ -88,11 +88,49 @@ const ResultContainer = ({ grade, location }) => {
     setEnable(false);
   };
 
+  function compare(a, b) {
+    if (a.grade > b.grade) {
+      return -1;
+    }
+    if (a.grade < b.grade) {
+      return 1;
+    }
+    return 0;
+  }
+
+  const [isLoading, setLoading] = useState(true);
+  const [ranking, setRanking] = useState([]);
+
+  const GetRank = () => {
+    let list = [];
+    FirebaseRDB.ref(`result`).on('value', (snap) => {
+      let key;
+      for (key in snap.val()) {
+        const obj = { ...snap.val()[key] };
+        list = [...list, obj];
+      }
+      list.sort(compare);
+
+      setRanking(list);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
+    });
+  };
+
+  useEffect(() => {
+    GetRank();
+  }, []);
+
+  console.log(ranking);
+
   return (
     <ResultPresenter
       nickname={nickname}
       onChange={onChange}
       SaveGrade={SaveGrade}
+      ranking={ranking}
+      isLoading={isLoading}
     />
   );
 };
