@@ -129,7 +129,7 @@ const random = (min, max) => {
 
 const JudgementHeader = (props) => {
   useEffect(() => {
-    if (props.grade.grade) {
+    if (props.grade.grade !== undefined) {
       color = effectData[props.grade.grade].color;
       vectorSize = effectData[props.grade.grade].vectorSize;
       number = effectData[props.grade.grade].number;
@@ -144,7 +144,7 @@ const JudgementHeader = (props) => {
   }, [props.grade.idx !== 0, props.grade.idx]);
 
   useEffect(() => {
-    if (props.grade.grade) {
+    if (props.grade.grade !== undefined) {
       color = effectData[props.grade.grade].color;
       vectorSize = effectData[props.grade.grade].vectorSize;
       number = effectData[props.grade.grade].number;

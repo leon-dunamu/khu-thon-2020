@@ -104,6 +104,7 @@ const TmPose = ({ grade, setGrade, isPlay }) => {
       }
       const nowTime = Date.now();
       const gapTime = nowTime - startTime;
+      console.log(gapTime);
       if (gapTime > dance_sequence_class_name_list[idx].time) {
         console.log(idx);
         setGrade({
