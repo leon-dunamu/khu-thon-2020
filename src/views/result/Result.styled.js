@@ -38,9 +38,11 @@ export const ResultContainer = styled.div`
   width: 420px;
   border-radius: 16px;
   background-color: rgba(80, 80, 80, 0.6);
+  height: 560px;
   padding: 24px;
   box-shadow: 0px 1px 24px -3px rgba(19, 239, 239, 0.6);
   position: relative;
+  margin: 0 20px;
 
   animation: ${shadow} 3s both infinite;
 `;
@@ -169,4 +171,30 @@ export const HomeButton = styled.div`
 export const SLink = styled(Link)`
   font-size: 26px;
   color: white;
+`;
+
+/**
+ * Rank
+ */
+
+export const RankContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
+
+export const RankItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+`;
+
+export const Desc = styled.span`
+  color: white;
+  font-size: 24px;
+  font-weight: 400;
 `;
