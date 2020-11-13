@@ -1,15 +1,43 @@
 import React, { useEffect } from 'react';
 import Sketch from 'react-p5';
+import { colorData } from '../../../theme/color';
 
-let x = 50;
 let P5;
-const y = 50;
 let system;
+
+const effectData = [
+  {
+    color: colorData.bad,
+    vectorSize: 1,
+    number: 10,
+    text: 'Bad',
+  },
+  {
+    color: colorData.good,
+    vectorSize: 3,
+    number: 30,
+    text: 'Good',
+  },
+  {
+    color: colorData.perfect,
+    vectorSize: 5,
+    number: 50,
+    text: 'Perfect!',
+  },
+];
+
+//effect state variables
+let { color, vectorSize, number, text } = effectData[0];
+
+let text_size = 48;
 
 // A simple Particle class
 let Particle = function (position) {
   this.acceleration = P5.createVector(0, 0.1);
-  this.velocity = P5.createVector(random(-5, 5), random(-5, 5));
+  this.velocity = P5.createVector(
+    random(-1 * vectorSize, vectorSize),
+    random(-1 * vectorSize, vectorSize),
+  );
   this.position = position.copy();
   this.lifespan = 255;
 };
@@ -30,7 +58,8 @@ Particle.prototype.update = function () {
 Particle.prototype.display = function () {
   P5.stroke(200, this.lifespan);
   P5.strokeWeight(2);
-  P5.fill(255, 204, 0, this.lifespan);
+
+  P5.fill(P5.color(color), this.lifespan);
   P5.ellipse(this.position.x, this.position.y, 12, 12);
 };
 
@@ -63,18 +92,26 @@ const setup = (p5, canvasParentRef) => {
   // (without that p5 will render the canvas outside of your component)
   p5.createCanvas(1480, 200).parent(canvasParentRef);
   P5 = p5;
-  system = new ParticleSystem(
-    P5.createVector(random(P5.width / 2, P5.width / 2 + 20), random(30, 50)),
-  );
+  P5.textAlign(P5.CENTER, P5.CENTER);
+  system = new ParticleSystem(P5.createVector(P5.width / 2, 60));
 };
 
 const draw = (p5) => {
   p5.background(0);
+  p5.fill(255, 0, 0, 0);
+  p5.text(text, p5.width / 2, 60);
+
+  if (text_size < 56) {
+    text_size += 4;
+  }
+
+  p5.textSize(text_size);
+
   system.run();
 };
 
 const addParticles = () => {
-  for (var i = 0; i < 50; i++) {
+  for (var i = 0; i < number; i++) {
     system.addParticle();
   }
 };
@@ -83,12 +120,20 @@ const random = (min, max) => {
   return Math.random() * (max - min) + min;
 };
 
-export default (props) => {
+const JudgementHeader = (props) => {
   useEffect(() => {
+    color = effectData[props.grade].color;
+    vectorSize = effectData[props.grade].vectorSize;
+    number = effectData[props.grade].number;
+    text = effectData[props.grade].text;
+
     setTimeout(() => {
       addParticles();
+      text_size = 32;
     }, 100);
   }, [props.grade]);
 
   return <Sketch setup={setup} draw={draw} />;
 };
+
+export default JudgementHeader;
