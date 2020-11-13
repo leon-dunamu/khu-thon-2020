@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 
 import * as s from './Home.styled';
 
+import { intromusic } from '../../components/utils/intromusic';
 import { Music } from 'components/utils/music';
 import { Video } from 'components/utils/backgroundvideo';
 
@@ -13,12 +14,32 @@ const game_number = 7;
 
 const Home = () => {
   const [center, setCenter] = useState(3);
+  const [audio, setAudio] = useState(
+    new Audio(audio_list[center % game_number]),
+  );
 
   const moveTrack = () => setCenter((prev) => prev + 1);
 
+  /**
+   * 배경 비디오
+   */
   useEffect(() => {
     document.querySelector('video').playbackRate = 0.7;
   }, []);
+
+  /**
+   * 가운데 목록에 해당하는 노래 재생
+   */
+  useEffect(() => {
+    const currentAudio = new Audio(audio_list[center % game_number]);
+
+    setAudio((prev) => {
+      prev?.pause();
+
+      currentAudio.play();
+      return currentAudio;
+    });
+  }, [center]);
 
   return (
     <>
@@ -47,6 +68,9 @@ const Home = () => {
               key={game.title}
               to={currentIdx === 3 ? '/dance' : null}
               status={currentIdx}
+              onClick={() => {
+                audio.pause();
+              }}
             >
               <s.SImg src={game.src} alt="game-image" />
               <s.DescContainer>
@@ -113,4 +137,14 @@ const game_list = [
     singer: 'Billie Eilish',
     src: Music.badguy,
   },
+];
+
+const audio_list = [
+  intromusic.badguy,
+  intromusic.watermelon,
+  intromusic.pump,
+  intromusic.magic,
+  intromusic.handclap,
+  intromusic.bang,
+  intromusic.moves,
 ];

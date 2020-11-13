@@ -19,6 +19,10 @@ export const CamContainer = styled.div`
   background-color: black;
   border-radius: 5px;
   overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const VideoPlayButton = styled.button`
