@@ -20,13 +20,29 @@ export const Container = styled.div`
   align-items: center;
 `;
 
+const shadow = keyframes`
+0%{
+  box-shadow: 0px 1px 24px -3px rgba(19, 239, 239, 0.6);
+
+}
+50%{
+  box-shadow: 0px 1px 60px -3px rgba(19, 239, 239, 0.9);
+}
+100%{
+  box-shadow: 0px 1px 24px -3px rgba(19, 239, 239, 0.6);
+
+}
+`;
+
 export const ResultContainer = styled.div`
   width: 420px;
   border-radius: 16px;
   background-color: rgba(80, 80, 80, 0.6);
   padding: 24px;
-  box-shadow: 0px 1px 42px -3px rgba(19, 239, 239, 0.6);
+  box-shadow: 0px 1px 24px -3px rgba(19, 239, 239, 0.6);
   position: relative;
+
+  animation: ${shadow} 3s both infinite;
 `;
 
 export const Title = styled.h1`
@@ -68,9 +84,9 @@ export const ResultTitle = styled.h2`
       ? '#00ff00'
       : '#a9a9a9'};
 
-font-size : ${(props) => (props.total ? '48px;' : '36px;')}
+  font-size: ${(props) => (props.total ? '48px' : '36px')};
 
-  animation-name : ${(props) => show(props.type)};
+  animation-name: ${(props) => show(props.type)};
   animation-duration: 0.2s;
   animation-delay: ${(props) =>
     props.type === 'perfect'
