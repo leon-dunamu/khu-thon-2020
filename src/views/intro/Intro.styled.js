@@ -15,8 +15,8 @@ export const Container = styled(Link)`
 `;
 
 export const Content = styled.div`
-  width: 400px;
-  height: 500px;
+  width: 800px;
+  height: 600px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,7 +29,7 @@ export const Logo = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   width: 100%;
-  height: 200px;
+  height: 300px;
 `;
 
 const clickany = keyframes`
