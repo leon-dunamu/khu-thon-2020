@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react';
 import * as s from './Dance.styled';
 
 import JudgementHeader from './judgement/JudgementHeader';
+import Guide from './guide/Guide';
 import TmPose from './TmPose';
 import { Video } from 'components/utils/backgroundvideo';
 
@@ -78,7 +79,9 @@ const Dance = () => {
         </s.CamContainer>
         <div id="label-container" style={{ opacity: 1 }}></div>
         <s.VideoPlayButton onClick={play}>play</s.VideoPlayButton>
-        {/* <s.CorrectPoseContainer></s.CorrectPoseContainer> */}
+        <s.CorrectPoseContainer>
+          <Guide />
+        </s.CorrectPoseContainer>
       </s.Wrapper>
     </div>
   );

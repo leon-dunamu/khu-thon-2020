@@ -1,7 +1,5 @@
 import React, { memo, useEffect } from 'react';
 import Sketch from 'react-p5';
-import { colorData } from '../../../theme/color';
-import { DeskTopWidth } from 'theme/width';
 
 let P5;
 let system;

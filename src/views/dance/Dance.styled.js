@@ -40,4 +40,8 @@ export const CorrectPoseContainer = styled.div`
   right: 0;
   bottom: 0;
   border-radius: 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
