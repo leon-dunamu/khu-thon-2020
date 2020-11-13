@@ -4,15 +4,15 @@
 
 import React, { useEffect, useState } from 'react';
 
-import * as s from './Home.styled';
+import * as s from './List.styled';
 
-import { intromusic } from '../../components/utils/intromusic';
+import { intromusic } from 'components/utils/intromusic';
 import { Music } from 'components/utils/music';
 import { Video } from 'components/utils/backgroundvideo';
 
 const game_number = 7;
 
-const Home = () => {
+const List = () => {
   const [center, setCenter] = useState(3);
   const [audio, setAudio] = useState(
     new Audio(audio_list[center % game_number]),
@@ -55,6 +55,7 @@ const Home = () => {
           left: 0,
           minWidth: '100%',
           minHeight: '100%',
+          zIndex: -3,
         }}
       >
         <source src={Video.HomeVideo} type="video/mp4" />
@@ -69,7 +70,7 @@ const Home = () => {
               to={currentIdx === 3 ? '/dance' : null}
               status={currentIdx}
               onClick={() => {
-                audio.pause();
+                if (currentIdx === 3) audio.pause();
               }}
             >
               <s.SImg src={game.src} alt="game-image" />
@@ -99,7 +100,7 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default List;
 
 const game_list = [
   {
