@@ -57,6 +57,7 @@ const Home = () => {
           left: 0,
           minWidth: '100%',
           minHeight: '100%',
+          zIndex: -3,
         }}
       >
         <source src={Video.HomeVideo} type="video/mp4" />
