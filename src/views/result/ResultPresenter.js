@@ -8,7 +8,13 @@ import { Video } from 'components/utils/backgroundvideo';
 
 import * as s from './Result.styled';
 
-const ResultPresenter = ({ nickname, onChange, SaveGrade }) => (
+const ResultPresenter = ({
+  nickname,
+  onChange,
+  SaveGrade,
+  ranking,
+  isLoading,
+}) => (
   <s.Container>
     <video
       preload="auto"
@@ -63,6 +69,25 @@ const ResultPresenter = ({ nickname, onChange, SaveGrade }) => (
           <s.SLink to="/">GO HOME</s.SLink>
         </s.HomeButton>
       </s.EnrollContainer>
+    </s.ResultContainer>
+    <s.ResultContainer>
+      <s.Title>RANKING</s.Title>
+      <s.RankContainer>
+        {!isLoading &&
+          ranking.map((rank, idx) => {
+            if (idx > 9) return null;
+            else {
+              return (
+                <s.RankItem>
+                  <s.Desc>{idx + 1}.</s.Desc>
+                  <s.Desc>{rank.nickname}</s.Desc>
+                  <s.Desc>{rank.createdAt}</s.Desc>
+                  <s.Desc>{rank.grade}</s.Desc>
+                </s.RankItem>
+              );
+            }
+          })}
+      </s.RankContainer>
     </s.ResultContainer>
   </s.Container>
 );
