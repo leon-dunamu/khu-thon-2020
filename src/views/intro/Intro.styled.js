@@ -49,6 +49,7 @@ export const DescContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding-bottom: 80px;
 
   opacity: 0.8;
   animation: ${clickany} 2.5s infinite;
