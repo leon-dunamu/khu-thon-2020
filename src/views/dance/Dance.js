@@ -2,10 +2,11 @@
  * @description 춤 출 수 있는 페이지
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import * as s from './Dance.styled';
 
+import JudgementHeader from './judgement/JudgementHeader';
 import TmPose from './TmPose';
 import { Video } from 'components/utils/backgroundvideo';
 
@@ -18,30 +19,49 @@ const Dance = () => {
     video.play();
   };
 
+  useEffect(() => {
+    const i = setInterval(() => {
+      setGrade((p) => p + 1);
+    }, 1000);
+
+    return () => clearInterval(i);
+  }, []);
+
   return (
-    <s.Wrapper>
-      {/* <TmPose grade={grade} setGrade={setGrade} /> */}
-      <video
-        id="dance-video"
-        preload="auto"
-        volume="0"
+    <>
+      <div
         style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100vw',
-          height: '100vh',
+          width: '100%',
+          height: 100,
         }}
       >
-        <source src={Video.DanceVideo} type="video/mp4" />
-      </video>
-      <s.CamContainer>
-        <canvas id="canvas"></canvas>
-      </s.CamContainer>
-      <div id="label-container" style={{ opacity: 0 }}></div>
-      <s.VideoPlayButton onClick={play}>play</s.VideoPlayButton>
-      <s.CorrectPoseContainer></s.CorrectPoseContainer>
-    </s.Wrapper>
+        <JudgementHeader grade={grade} />
+      </div>
+      <s.Wrapper>
+        {/* <TmPose grade={grade} setGrade={setGrade} /> */}
+
+        <video
+          id="dance-video"
+          preload="auto"
+          volume="0"
+          style={{
+            position: 'absoulte',
+            top: 0,
+            left: 0,
+            width: '100vw',
+            height: '100vh',
+          }}
+        >
+          <source src={Video.DanceVideo} type="video/mp4" />
+        </video>
+        {/* <s.CamContainer>
+          <canvas id="canvas"></canvas>
+        </s.CamContainer> */}
+        <div id="label-container" style={{ opacity: 0 }}></div>
+        <s.VideoPlayButton onClick={play}>play</s.VideoPlayButton>
+        <s.CorrectPoseContainer></s.CorrectPoseContainer>
+      </s.Wrapper>
+    </>
   );
 };
 
