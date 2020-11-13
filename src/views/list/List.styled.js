@@ -7,7 +7,7 @@ const standard = 3;
 const animation = (status) => {
   return keyframes`
     0%{
-      left: ${39 + 15 * ((Math.abs(status - 1) % 7) - standard)}%;
+      left: ${37.5 + 15 * ((Math.abs(status - 1) % 7) - standard)}%;
       top : 20%;
       transform : scale(${status === 3 ? 1 : status === 4 ? 1.56 : 1});
       background-color : ${
@@ -20,7 +20,7 @@ const animation = (status) => {
       z-index: ${10 - 2 * Math.abs(status - standard)};
     }
     100%{
-      left: ${39 + 15 * ((status % 7) - standard)}%;
+      left: ${37.5 + 15 * ((status % 7) - standard)}%;
       top : 20%;
       transform : scale(${
         status === 3 ? 1.56 : Math.abs(standard - status) === 1 ? 1.2 : 1
@@ -62,7 +62,7 @@ export const SLink = styled(Link)`
       ? `scale(1.2)`
       : `scale(1)`};
 
-  left: ${(props) => 39 + 15 * (props.status - standard)}%;
+  left: ${(props) => 37.5 + 15 * (props.status - standard)}%;
   top: 20%;
 
   z-index: ${(props) => 10 - 2 * Math.abs(props.status - standard)};

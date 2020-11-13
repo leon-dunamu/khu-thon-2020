@@ -62,8 +62,10 @@ const ResultContainer = ({ grade }) => {
     }
     if (nickname === '') {
       alert('닉네임을 입력해주세요');
+      return;
     } else if (nickname.length < 3) {
       alert('닉네임은 최소 3자 입니다');
+      return;
     }
     const createdAt = Date.now();
 
