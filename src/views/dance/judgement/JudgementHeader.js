@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import Sketch from 'react-p5';
 import { colorData } from '../../../theme/color';
 import { DeskTopWidth } from 'theme/width';
@@ -129,19 +129,36 @@ const random = (min, max) => {
 
 const JudgementHeader = (props) => {
   useEffect(() => {
-    color = effectData[props.grade].color;
-    vectorSize = effectData[props.grade].vectorSize;
-    number = effectData[props.grade].number;
-    text = effectData[props.grade].text;
+    if (props.grade.grade !== undefined) {
+      color = effectData[props.grade.grade].color;
+      vectorSize = effectData[props.grade.grade].vectorSize;
+      number = effectData[props.grade.grade].number;
+      text = effectData[props.grade.grade].text;
 
-    setTimeout(() => {
-      addParticles();
-      fade = 255;
-      text_size = 24;
-    }, 200);
-  }, [props.grade]);
+      setTimeout(() => {
+        addParticles();
+        fade = 255;
+        text_size = 24;
+      }, 200);
+    }
+  }, [props.grade.idx !== 0, props.grade.idx]);
+
+  useEffect(() => {
+    if (props.grade.grade !== undefined) {
+      color = effectData[props.grade.grade].color;
+      vectorSize = effectData[props.grade.grade].vectorSize;
+      number = effectData[props.grade.grade].number;
+      text = effectData[props.grade.grade].text;
+
+      setTimeout(() => {
+        addParticles();
+        fade = 255;
+        text_size = 24;
+      }, 200);
+    }
+  }, [props.grade.idx === 0, props.grade.grade]);
 
   return <Sketch setup={setup} draw={draw} />;
 };
 
-export default JudgementHeader;
+export default memo(JudgementHeader);
