@@ -1,4 +1,4 @@
-# KHUTHON 2020
+# KHUTHON 2020 대상
 
 ## Getting Started with Create React App
 
