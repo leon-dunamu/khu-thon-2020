@@ -125,14 +125,15 @@ const TmPose = ({ grade, setGrade, isPlay }) => {
 
       if (idx < dance_sequence_class_name_list.length) {
         if (gapTime - 300 > dance_sequence_class_name_list[idx].time) {
-          const g = Math.floor(Math.random() * 3);
-          if (g === 0) bCount = bCount + 1;
-          else if (g === 1) gCount = gCount + 1;
-          else if (g === 2) pCount = pCount + 1;
+          // const g = Math.floor(Math.random() * 3);
+          // if (g === 0) bCount = bCount + 1;
+          // else if (g === 1) gCount = gCount + 1;
+          // else if (g === 2) pCount = pCount + 1;
           setGrade({
             idx: idx++,
             // grade: Math.floor(Math.random() * 3),
-            grade: g,
+            // grade: g,
+            grade: 0,
           });
         } else {
           if (
@@ -158,14 +159,15 @@ const TmPose = ({ grade, setGrade, isPlay }) => {
                 grade: 1,
               });
             } else {
-              const g = Math.floor(Math.random() * 3);
-              if (g === 0) bCount = bCount + 1;
-              else if (g === 1) gCount = gCount + 1;
-              else if (g === 2) pCount = pCount + 1;
+              // const g = Math.floor(Math.random() * 3);
+              // if (g === 0) bCount = bCount + 1;
+              // else if (g === 1) gCount = gCount + 1;
+              // else if (g === 2) pCount = pCount + 1;
               setGrade({
                 idx: idx++,
                 // grade: Math.floor(Math.random() * 3),
-                grade: g,
+                // grade: g,
+                grade: 0,
               });
             }
           }
