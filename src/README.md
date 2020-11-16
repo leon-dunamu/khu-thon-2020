@@ -58,7 +58,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 3. 노래 선정 및 포즈 선택
 
-    <img src= 'https://user-images.githubusercontent.com/49581472/99253245-c22c1e80-2853-11eb-9a58-5d69345e8427.png' />
+<img src= 'https://user-images.githubusercontent.com/49581472/99253245-c22c1e80-2853-11eb-9a58-5d69345e8427.png' />
 
 4. Google Teachable Machine 모델링
 
@@ -80,7 +80,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 - 아쉬운 점
 
-  - Dance 페이지의 백그라운드 비디오의 용량이 매우 큼 (노래 한 곡에 약 400MB) > <br /> > 👉 &nbsp; Github에 업로드 불가 <br /> <br /> > 👉 &nbsp; 서버에서 제공하기 부담 예상 <br /> > <br />
+  - Dance 페이지의 백그라운드 비디오의 용량이 매우 큼 (노래 한 곡에 약 400MB) <br />
+
+    >  <br /> 
+    > 👉 &nbsp; Github에 업로드 불가 <br /> <br />
+    > 👉 &nbsp; 서버에서 제공하기 부담 예상 <br /> 
+    > <br />
+
     <br />
 
   - 웹캠의 포즈 인식 지연으로 인해 "정확한" 포즈 타이밍을 잡지 못 함
